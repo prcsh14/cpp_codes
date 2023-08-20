@@ -27,6 +27,8 @@ using namespace std;
 
 
 
+
+
 vector<vector<int>> subset(vector<int> &v){
    int n = v.size();
    int sbst_ct = (1<<n); //2^n
@@ -42,6 +44,9 @@ vector<vector<int>> subset(vector<int> &v){
    }
    return vm;
 }
+//TC - O(N*(2^N))
+
+
 
 
 int main(){
