@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+#define ll          long long
+#define pb          push_back
+#define fst         first
+#define sec         second
+#define endl        '\n'
+#define rep(i,a,b)   for(int i=a;i<b;i++)
+using namespace std;
+
+
+// generating subset using bitmask
+
+
+// 1) - generate each possible subset for 3 numbers
+// 1 2 3
+
+// 2 * 2 * 2 = 8 possibilites
+// generalized way = 2 ^ (n-1) possible subsets for n numbers as we start from 0 
+
+// 0  - 0 0 0 - []
+// 1  - 0 0 1 - [1] - represents a subset where only the 0th element is present 
+// 2  - 0 1 0 - [2]
+// and so on till 8
+// 8  - 1 1 1  - [1 , 2 , 3]
+
+// so here each bitmask represents the position of the subset filled
+
+
+
+vector<vector<int>> subset(vector<int> &v){
+   int n = v.size();
+   int sbst_ct = (1<<n); //2^n
+   vector<vector<int>> vm;
+   for(int mask = 0 ; mask<sbst_ct ; mask++){
+      vector<int> subset;
+      //iterate over the main vector check for the j-th bit if set put in subset else dont 
+      for(int j = 0 ; j<n ; j++){
+         if(mask & (1<<j)) subset.push_back(v[j]);
+      }
+      //after each vector gets formed push into main vector of vector
+      vm.push_back(subset);
+   }
+   return vm;
+}
+
+
+int main(){
+   #ifndef ONLINE_JUDGE
+   freopen("input.txt", "r", stdin);
+   freopen("output.txt", "w", stdout);
+   #endif
+   int n;
+   cin>>n;
+   vector<int> v;
+   rep(i ,0, n) cin>>v[i];
+   auto ans = subset(v);
+   
+   for(auto it : ans){
+      for(auto num : it){
+         cout<<num<<" ";
+      }
+      cout<<endl;
+   }
+   return 0;
+}
