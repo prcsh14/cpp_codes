@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+#define ll          long long
+#define pb          push_back
+#define fst         first
+#define sec         second
+#define endl        '\n'
+#define rep(i,a,b)   for(int i=a;i<b;i++)
+using namespace std;
+
+// BINARY EXPONENTIAION 
+// the idea is simple 
+// 2^8 can be written as 4^4 which can be written as 16^2
+// so we reduce the power by half and do a*a
+//if there are modular constraints then use modulo at step 1 and 2
+int binaryexpo(int a, int n) {
+    int res = 1;
+    while (n) {
+        if (n & 1) {
+            res *= a; //1 step
+            n--;
+        }
+        a *= a; //2 step
+        n >>= 1; // n >> = 1; = n/2 at each step 
+    }
+    return res;
+}
+
+
+
+int main() {
+   #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif // ONLINE_JUDGE
+
+   int a , b;
+   cin>>a>>b;
+   cout<<binaryexpo(a,b);
+   return 0;
+}
