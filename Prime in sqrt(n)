@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+#define ll          long long
+#define pb          push_back
+#define fst         first
+#define sec         second
+#define endl        '\n'
+#define rep(i,a,b)   for(int i=a;i<b;i++)
+using namespace std;
+
+// Prime test in O(sqrt (n))
+// 1) there are atleast 2 divisors for any number (12*1 = 12)
+// 2) either of the two is less than (sqrt(n))
+// 3) so if one exists other has to exist
+// 4) t no of divisors exist then t/2 will like below sqrt n rest t/2 above sqrt n 
+// 5) so i=2 (since 1 is always a divisor) run a loop till sqrt n and find the no of divisors
+// 6) if i get a divisor other than one then not prime else prime
+// 7) for doing sqrt we simply do the reverse i*i = n
+
+bool isprime(int n ){
+    if(n == 1 ) return false;
+    for(int i = 2 ; i*i<=n ; i++){
+        if(n % i == 0) return false;
+    }
+    return true;
+}
+
+
+int main() {
+   #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif // ONLINE_JUDGE
+   int a;
+   cin>>a;
+   cout<<((isprime(a)) ? "yes" : "no");
+   return 0;
+}
