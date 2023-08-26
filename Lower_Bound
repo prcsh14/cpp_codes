@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+#define ll          long long
+#define pb          push_back
+#define fst         first
+#define sec         second
+#define endl        '\n'
+#define rep(i,a,b)   for(int i=a;i<b;i++)
+using namespace std;
+
+// lowerbound --> bydef -- index of target or if not found the target then the index of the element just greater than the target
+// this is a bullet proof method of bs 
+// works on predicate function
+
+// if arr[i] >= target 1 1 1 1 till inf 
+// else if arr[i] < target then returns 0 
+// so the function looks somewhat like this (has to be sorted)
+// 0 0 0 0 0 1 1 1 1 and so on 
+// we have to find the first (1)
+
+// if check(mid) = 1 we save it in ans and wait if there are better options we get 
+
+// you can then keep a check on ans if its -1 then its known that answer didnt exist
+
+bool check(int mid , int arr[] , int target){
+   if(arr[mid] == target) return true;
+   else return false;
+}
+
+
+int lb(int n , int arr[] , int target){
+   int lo = 0;
+   int hi = n-1;
+   int ans = -1;
+
+   while(lo <= hi){
+      int mid = lo + (hi - lo)/2;
+      if(check(mid , arr , target) == 1){
+         ans = mid;
+         hi = mid - 1;
+      }
+      else lo = mid + 1;
+   }
+   return ans;
+}
+
+int main(){
+   #ifndef ONLINE_JUDGE
+   freopen("input.txt", "r", stdin);
+   freopen("output.txt", "w", stdout);
+   #endif
+   int n ;
+   cin>>n;
+   int arr[n];
+   rep(i ,0, n) cin>>arr[i];
+   int target;
+   cin>>target;
+   int ans = lb(n , arr , target);
+   cout<<ans<<endl;
+   cout<<"the element of lowerbound is"<<endl<<arr[ans]<<endl;
+   return 0;
+}
