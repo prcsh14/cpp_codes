@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+#define ll          long long
+#define pb          push_back
+#define fst         first
+#define sec         second
+#define endl        '\n'
+#define rep(i,a,b)  for(int i=a;i<b;i++)
+using namespace std;
+
+int power(int x , int n){
+  if(n == 0) return 1;
+  if(n == 1) return x;
+  int temp = power(x , n/2);
+  if(!(n&1)){
+    return temp*temp;
+  }
+  else{
+    return temp*temp*x;
+  }
+}
+
+int main() {
+  int x , n;
+  cin>>x>>n;
+  cout<<power(x , n);
+  return 0;
+}
