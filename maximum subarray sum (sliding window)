@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+#define ll          long long
+#define pb          push_back
+#define fst         first
+#define sec         second
+#define endl        '\n'
+#define rep(i,a,b)   for(int i=a;i<b;i++)
+using namespace std;
+
+int max_subarray_sum(vector<int> &arr, int size){
+    int n = arr.size();
+    int sum = 0;
+    int maxsum = INT_MIN; 
+    int i = 0, j = 0;
+    while(j < n){
+        sum += arr[j];
+        if(j - i + 1 < size){
+            j++;
+        }
+        else if(j - i + 1 == size){
+            maxsum = max(maxsum, sum);
+            sum -= arr[i];
+            i++;
+            j++;
+        }
+    }
+    return maxsum;
+}
+
+int main() {
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif // ONLINE_JUDGE
+    int n;
+    cin >> n;
+    int k;
+    cin >> k;
+    vector<int> v(n);
+    rep(i, 0, n) cin >> v[i];
+    cout << max_subarray_sum(v, k);
+    return 0;
+}
